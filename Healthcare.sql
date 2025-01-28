@@ -1,4 +1,4 @@
-CREATE DATABASE IF NOT EXISTS HealthcareManagementTwoDB;
+## CREATE DATABASE IF NOT EXISTS HealthcareManagementTwoDB;
 USE HealthcareManagementTwoDB;
 
 CREATE TABLE Patients (
