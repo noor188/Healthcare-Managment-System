@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 ---
 
@@ -235,3 +236,7 @@ Refactor the `Main` class to include options for managing doctors and appointmen
 - **Session Management**: Properly manage Hibernate sessions to avoid memory leaks and ensure efficient use of database connections.
 - **Testing**: Test each functionality thoroughly to ensure that the application behaves as expected and interacts correctly with the database.
 
+=======
+# Healthcare_hibernate_1.0.1-
+Healthcare Management System - Hibernate Implementation
+>>>>>>> 19b69e06e1eced08916c92d1ca52a48cd1569548
