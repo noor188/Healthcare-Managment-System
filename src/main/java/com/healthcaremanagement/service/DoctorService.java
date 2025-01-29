@@ -14,7 +14,7 @@ public class DoctorService {
     }
 
     public void createDoctor(Doctor doctor) {
-        doctorRepository.createDoctor(doctor);
+        this.doctorRepository.createDoctor(doctor);
     }
 
     public Doctor getDoctorById(int id) {
