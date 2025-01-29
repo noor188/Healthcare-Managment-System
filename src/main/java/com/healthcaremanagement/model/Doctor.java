@@ -1,13 +1,23 @@
 package com.healthcaremanagement.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.ToString;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+
+@Data
+@ToString(exclude = "patients")
 @Entity
-@Table(name = "Doctors")
+@Table(name= "Doctors")
 public class Doctor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "DoctorId")
     private int doctorId;
 
     @Column(name = "FirstName")
@@ -16,50 +26,34 @@ public class Doctor {
     @Column(name = "LastName")
     private String lastName;
 
-    @Column(name = "Speciality")
-    private String speciality;
+    @Column(name = "Specialty")
+    private String specialty;
 
     @Column(name = "Email")
     private String email;
 
-    public int getDoctorId() {
-        return doctorId;
+    @OneToMany(mappedBy = "doctor")
+    private Set<Appointment> appointments = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "doctor_patient",
+            joinColumns = @JoinColumn(name = "DoctorID"),
+            inverseJoinColumns = @JoinColumn(name = "PatientID")
+    )
+    private Set<Patient> patients = new HashSet<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Doctor that = (Doctor) o;
+        return doctorId == that.doctorId;
     }
 
-    public void setDoctorId(int doctorId) {
-        this.doctorId = doctorId;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getSpeciality() {
-        return speciality;
-    }
-
-    public void setSpeciality(String speciality) {
-        this.speciality = speciality;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    @Override
+    public int hashCode() {
+        return Objects.hash(doctorId);
     }
 
 }

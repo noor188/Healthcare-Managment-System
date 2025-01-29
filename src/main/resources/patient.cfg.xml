@@ -20,9 +20,9 @@
         <property name="hibernate.hbm2ddl.auto">update</property>
 
         <!-- Names of annotated entity classes -->
-
         <mapping class="com.healthcaremanagement.model.Patient"/>
         <mapping class="com.healthcaremanagement.model.Doctor"/>
+        <mapping class="com.healthcaremanagement.model.Appointment"/>
 
     </session-factory>
 </hibernate-configuration>
