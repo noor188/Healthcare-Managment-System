@@ -1,5 +1,7 @@
 package com.healthcaremanagement.service;
 
+import com.healthcaremanagement.model.Appointment;
+import com.healthcaremanagement.model.Doctor;
 import com.healthcaremanagement.model.Patient;
 import com.healthcaremanagement.repository.PatientRepositoryImpl;
 
@@ -32,4 +34,6 @@ public class PatientService {
     public void deletePatient(int id) {
         patientRepository.deletePatient(id);
     }
+
+
 }

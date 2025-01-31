@@ -1,8 +1,10 @@
 package com.healthcaremanagement.service;
 
 import com.healthcaremanagement.model.Appointment;
+import com.healthcaremanagement.model.Doctor;
 import com.healthcaremanagement.model.Patient;
 import com.healthcaremanagement.repository.AppointmentRepositoryImpl;
+import com.healthcaremanagement.repository.DoctorRepositoryImpl;
 import com.healthcaremanagement.repository.PatientRepositoryImpl;
 
 import java.util.List;
@@ -10,10 +12,12 @@ import java.util.List;
 public class AppointmentService {
 
     private final AppointmentRepositoryImpl appointmentRepositoryImpl;
-    private final PatientRepositoryImpl patientRepositoryImpl;
+    // patient
+
 
     public AppointmentService(AppointmentRepositoryImpl appointmentRepositoryImpl) {
         this.appointmentRepositoryImpl = appointmentRepositoryImpl;
+
     }
 
     public void createAppointment(Appointment appointment){
@@ -36,7 +40,13 @@ public class AppointmentService {
         return this.appointmentRepositoryImpl.getAllAppointments();
     }
 
-    public Patient getPatienById(int patienId){
-        return this.appointmentRepositoryImpl.getPatienById(patienId);
+    public Patient getPatienById(int patientId){
+        return this.appointmentRepositoryImpl.getPatienById(patientId);
     }
+
+    public Doctor getDocotrById(int docotrId){
+        return this.appointmentRepositoryImpl.getDocotrById(docotrId);
+    }
+
+
 }

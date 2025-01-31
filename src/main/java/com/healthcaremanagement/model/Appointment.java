@@ -21,7 +21,7 @@ public class Appointment {
     private String notes;
 
     @ManyToOne
-    @JoinColumn(name = "DoctorId")
+    @JoinColumn(name = "DoctorID")
     private Doctor doctor;
 
     @ManyToOne
