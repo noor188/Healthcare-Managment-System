@@ -12,9 +12,13 @@ import java.util.List;
 public class AppointmentRepositoryImpl {
 
     private SessionFactory sessionFactory;
+    private final PatientRepositoryImpl patientRepository;
+    private final DoctorRepositoryImpl doctorRepository;
 
-    public AppointmentRepositoryImpl(SessionFactory sessionFactory){
+    public AppointmentRepositoryImpl(SessionFactory sessionFactory, PatientRepositoryImpl patientRepository, DoctorRepositoryImpl doctorRepository) {
         this.sessionFactory = sessionFactory;
+        this.patientRepository = patientRepository;
+        this.doctorRepository = doctorRepository;
     }
 
     public void createAppointment(Appointment appointment){
@@ -42,7 +46,11 @@ public class AppointmentRepositoryImpl {
     public void deleteAppointment(int appointmentId){
         try(Session session = this.sessionFactory.openSession()){
             Transaction tx = session.beginTransaction();
-            session.delete(appointmentId);
+            Appointment appointment = getAppointmentById(appointmentId);
+
+            if (appointment != null){
+                session.delete(appointment);
+            }
             tx.commit();
         }
     }
@@ -54,15 +62,12 @@ public class AppointmentRepositoryImpl {
     }
 
     public Patient getPatienById(int patientId){
-        try(Session session = this.sessionFactory.openSession()){
-            return session.get(Patient.class, patientId);
-        }
+        return this.patientRepository.getPatientById(patientId);
     }
 
-    public Doctor getDoctorById(int docotrId){
-        try(Session session = this.sessionFactory.openSession()){
-            return session.get(Doctor.class, docotrId);
-        }
+    public Doctor getDocotrById(int docotrId){
+        return this.doctorRepository.getDoctorById(docotrId);
     }
+
 
 }

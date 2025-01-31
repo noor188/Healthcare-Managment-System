@@ -1,5 +1,7 @@
 package com.healthcaremanagement.repository;
 
+import com.healthcaremanagement.model.Appointment;
+import com.healthcaremanagement.model.Doctor;
 import com.healthcaremanagement.model.Patient;
 
 import org.hibernate.Session;
@@ -7,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import java.util.List;
+import java.util.Set;
 
 public class PatientRepositoryImpl{
 
@@ -54,4 +57,5 @@ public class PatientRepositoryImpl{
             return session.createQuery("from Patient", Patient.class).list();
         }
     }
+
 }
