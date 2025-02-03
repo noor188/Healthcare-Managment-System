@@ -58,4 +58,28 @@ public class PatientRepositoryImpl{
         }
     }
 
+    public void addDoctorToPatient(int patientID, Doctor doctor) {
+        try(Session session = this.sessionFactory.openSession()){
+            Transaction tx = session.beginTransaction();
+            Patient patient = session.get(Patient.class, patientID);
+            if(patient != null & !patient.getDoctors().contains(doctor)){
+                patient.getDoctors().add(doctor);
+                session.merge(patient);
+            }
+            tx.commit();
+        }
+    }
+
+    public void removeDoctorForPatient(int patientId, Doctor doctor) {
+        try (Session session = sessionFactory.openSession()) {
+            Transaction transaction = session.beginTransaction();
+            Patient patient = session.get(Patient.class, patientId);
+            if (patient != null && patient.getDoctors().contains(doctor)) {
+                patient.getDoctors().remove(doctor);
+                session.merge(patient);
+            }
+            transaction.commit();
+        }
+    }
+
 }

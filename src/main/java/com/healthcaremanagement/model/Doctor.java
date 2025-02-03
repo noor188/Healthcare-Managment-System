@@ -2,6 +2,7 @@ package com.healthcaremanagement.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.util.HashSet;
@@ -10,7 +11,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Data
-@ToString(exclude = "patients")
+@ToString(exclude = {"patients", "appointments"})
 @Entity
 @Table(name= "Doctors")
 public class Doctor {
@@ -32,13 +33,13 @@ public class Doctor {
     @Column(name = "Email")
     private String email;
 
-    @OneToMany(mappedBy = "doctor")
+    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Appointment> appointments = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
     @JoinTable(
-            name = "doctor_patient",
-            joinColumns = @JoinColumn(name = "DoctorID"),
+            name = "patient_doctor",
+            joinColumns = @JoinColumn(name  = "DoctorID"),
             inverseJoinColumns = @JoinColumn(name = "PatientID")
     )
     private Set<Patient> patients = new HashSet<>();

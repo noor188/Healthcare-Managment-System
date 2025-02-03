@@ -7,18 +7,16 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class AppointmentRepositoryImpl {
 
     private SessionFactory sessionFactory;
-    private final PatientRepositoryImpl patientRepository;
-    private final DoctorRepositoryImpl doctorRepository;
 
-    public AppointmentRepositoryImpl(SessionFactory sessionFactory, PatientRepositoryImpl patientRepository, DoctorRepositoryImpl doctorRepository) {
+    public AppointmentRepositoryImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
-        this.patientRepository = patientRepository;
-        this.doctorRepository = doctorRepository;
     }
 
     public void createAppointment(Appointment appointment){
@@ -61,13 +59,16 @@ public class AppointmentRepositoryImpl {
         }
     }
 
-    public Patient getPatienById(int patientId){
-        return this.patientRepository.getPatientById(patientId);
+    public boolean hasOtherAppointmentsBetween(int doctorId, int patientId) {
+        try (Session session = sessionFactory.openSession()) {
+            String query = "SELECT COUNT(a) FROM Appointment a " +
+                    "WHERE a.doctor.doctorId = :doctorId " +
+                    "AND a.patient.patientId = :patientId";
+            Long count = session.createQuery(query, Long.class)
+                    .setParameter("doctorId", doctorId)
+                    .setParameter("patientId", patientId)
+                    .uniqueResult();
+            return count != null && count > 1;
+        }
     }
-
-    public Doctor getDocotrById(int docotrId){
-        return this.doctorRepository.getDoctorById(docotrId);
-    }
-
-
 }
