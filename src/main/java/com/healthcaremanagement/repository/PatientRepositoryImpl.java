@@ -1,6 +1,5 @@
 package com.healthcaremanagement.repository;
 
-import com.healthcaremanagement.model.Appointment;
 import com.healthcaremanagement.model.Doctor;
 import com.healthcaremanagement.model.Patient;
 
@@ -9,7 +8,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import java.util.List;
-import java.util.Set;
 
 public class PatientRepositoryImpl{
 
@@ -70,7 +68,7 @@ public class PatientRepositoryImpl{
         }
     }
 
-    public void removeDoctorForPatient(int patientId, Doctor doctor) {
+    public void removeDoctorFromPatient(int patientId, Doctor doctor) {
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.beginTransaction();
             Patient patient = session.get(Patient.class, patientId);

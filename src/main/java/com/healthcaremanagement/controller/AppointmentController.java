@@ -3,7 +3,6 @@ package com.healthcaremanagement.controller;
 import com.healthcaremanagement.model.Appointment;
 import com.healthcaremanagement.model.Doctor;
 import com.healthcaremanagement.model.Patient;
-import com.healthcaremanagement.repository.PatientRepositoryImpl;
 import com.healthcaremanagement.service.AppointmentService;
 import com.healthcaremanagement.service.DoctorService;
 import com.healthcaremanagement.service.PatientService;
@@ -74,7 +73,7 @@ public class AppointmentController {
         Appointment appointment = this.appointmentService.getAppointmentById(this.scanner.nextInt());
         if (appointment != null) {
             System.out.println("Doctor name:" + appointment.getDoctor());
-            System.out.println("Patient name: " + appointment.getDoctor());
+            System.out.println("Patient name: " + appointment.getPatient());
             System.out.println("Appointment date: " + appointment.getAppointmentDate());
             System.out.println("Notes: " + appointment.getNotes());
         }else {
@@ -84,18 +83,42 @@ public class AppointmentController {
 
     public void updateAppointmentPrompt() {
 
-        System.out.print("Enter doctor ID: ");
+        System.out.print("Enter appointment ID: ");
         Appointment appointment = this.appointmentService.getAppointmentById(this.scanner.nextInt());
         this.scanner.nextLine();
+
+        Doctor originalDoctor = appointment.getDoctor();
+        Patient originalPatient = appointment.getPatient();
+
+        if (!appointmentService.hasOtherAppointmentsBetween(
+                originalDoctor.getDoctorId(), originalPatient.getPatientId())) {
+            doctorService.removePatientFromDoctor(originalDoctor.getDoctorId(), originalPatient);
+            patientService.removeDoctorFromPatient(originalPatient.getPatientId(), originalDoctor);
+        }
+
         appointmentFieldsPrompt(appointment);
         this.appointmentService.updateAppointment(appointment);
+
+
         System.out.println("Appointment updated successfully");
     }
 
     public void deleteAppointmentPrompt() {
 
         System.out.print("Enter appointment ID: ");
-        this.appointmentService.deleteAppointment(this.scanner.nextInt());
+        int appointmentId = scanner.nextInt();
+        Appointment appointment = this.appointmentService.getAppointmentById(appointmentId);
+        this.appointmentService.deleteAppointment(appointmentId);
+
+        Doctor doctorToCheck = appointment.getDoctor();
+        Patient patientToCheck = appointment.getPatient();
+
+        if (!appointmentService.hasOtherAppointmentsBetween(
+                doctorToCheck.getDoctorId(), patientToCheck.getPatientId())) {
+            doctorService.removePatientFromDoctor(doctorToCheck.getDoctorId(), patientToCheck);
+            patientService.removeDoctorFromPatient(patientToCheck.getPatientId(), doctorToCheck);
+        }
+
         System.out.println("Appointment deleted successfully");
     }
 
