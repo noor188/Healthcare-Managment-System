@@ -1,4 +1,4 @@
-## Healthcare Management System - Hibernate Implementation
+## Healthcare Management System
 
 
 ###  101: Ticket Breakdown: Healthcare Management System - Hibernate Implementation
