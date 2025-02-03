@@ -2,9 +2,9 @@
 
 
 ###  101: Ticket Breakdown: Healthcare Management System - Hibernate Implementation
-1. Ticket : Implement Doctor Class and DoctorRepository
-2. Ticket : Implement Appointment Class and AppointmentRepository
-3. Ticket : Refactor Main Class to Include Doctors and Appointments
+1. Ticket 1: Implement Doctor Class and DoctorRepository
+2. Ticket 3: Implement Appointment Class and AppointmentRepository
+3. Ticket 4: Refactor Main Class to Include Doctors and Appointments
 
 ------------------------------------------------------------------------
 
