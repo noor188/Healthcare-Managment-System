@@ -20,7 +20,7 @@ public class Office {
     private String phone;
 
     @OneToOne
-    @JoinColumn(name = "DoctorID")
+    @JoinColumn(name="DoctorID")
     private Doctor doctor;
 
 }

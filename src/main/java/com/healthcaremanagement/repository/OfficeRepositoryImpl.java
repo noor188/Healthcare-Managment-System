@@ -1,5 +1,6 @@
 package com.healthcaremanagement.repository;
 
+import com.healthcaremanagement.model.Doctor;
 import com.healthcaremanagement.model.Office;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -41,6 +42,8 @@ public class OfficeRepositoryImpl {
         try(Session session = sessionFactory.openSession()){
             Transaction tx = session.beginTransaction();
             Office office = session.get(Office.class, officeId);
+            Doctor doctor = office.getDoctor();
+            doctor.setOffice(null);
 
             if (office != null){
                 session.delete(office);

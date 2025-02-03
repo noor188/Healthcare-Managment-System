@@ -1,18 +1,19 @@
 package com.healthcaremanagement.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-@Data
-@ToString(exclude = {"patients", "appointments"})
 @Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString(exclude = {"patients", "appointments"})
+@EqualsAndHashCode(exclude = "appointments")
 @Table(name= "Doctors")
 public class Doctor {
 
@@ -36,7 +37,7 @@ public class Doctor {
     @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Appointment> appointments = new HashSet<>();
 
-    @OneToOne(mappedBy = "doctor", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "doctor",cascade = CascadeType.ALL)
     private Office office;
 
     @ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
