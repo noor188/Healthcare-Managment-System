@@ -1,11 +1,9 @@
 package com.healthcaremanagement.service;
 
 import com.healthcaremanagement.model.Appointment;
-import com.healthcaremanagement.model.Doctor;
 import com.healthcaremanagement.model.Patient;
 import com.healthcaremanagement.repository.AppointmentRepositoryImpl;
-import com.healthcaremanagement.repository.DoctorRepositoryImpl;
-import com.healthcaremanagement.repository.PatientRepositoryImpl;
+import org.hibernate.Session;
 
 import java.util.List;
 
@@ -40,13 +38,7 @@ public class AppointmentService {
         return this.appointmentRepositoryImpl.getAllAppointments();
     }
 
-    public Patient getPatienById(int patientId){
-        return this.appointmentRepositoryImpl.getPatienById(patientId);
+    public boolean hasOtherAppointmentsBetween(int doctorId, int patientId) {
+        return this.appointmentRepositoryImpl.hasOtherAppointmentsBetween(doctorId, patientId);
     }
-
-    public Doctor getDocotrById(int docotrId){
-        return this.appointmentRepositoryImpl.getDocotrById(docotrId);
-    }
-
-
 }

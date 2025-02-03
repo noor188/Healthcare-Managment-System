@@ -3,7 +3,6 @@ package com.healthcaremanagement.service;
 import com.healthcaremanagement.model.Doctor;
 import com.healthcaremanagement.model.Patient;
 import com.healthcaremanagement.repository.DoctorRepositoryImpl;
-import org.hibernate.Session;
 
 import java.util.List;
 
@@ -35,8 +34,12 @@ public class DoctorService {
         doctorRepository.deleteDoctor(id);
     }
 
-    public List<Patient> getAllPatients(){
-        return this.doctorRepository.getAllPatients();
+    public void addPatientToDoctor(int doctorID, Patient patient){
+        this.doctorRepository.addPatientToDoctor(doctorID, patient);
+    }
+
+    public void removePatientFromDoctor(int doctorId, Patient patient) {
+        this.doctorRepository.removePatientFromDoctor(doctorId, patient);
     }
 
 }
