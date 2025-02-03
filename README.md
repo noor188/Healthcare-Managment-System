@@ -8,6 +8,7 @@
 ------------------------------------------------------------------------
 
 ### 102: Ticket Breakdown: Healthcare Management System - Advanced Hibernate Relationships Implementation
+1. Ticket 1: Implement Office Class and OfficeRepository for One-to-One Relationship
 2. Ticket 2: Implement Relationships Between Entities (One-to-Many, Many-to-One, Many-to-Many)
 3. Ticket 3: Implement Helper Methods in Repositories
 5. Ticket 5: Refactor HealthRunner Class to Use Relationship Methods
