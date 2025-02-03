@@ -36,6 +36,9 @@ public class Doctor {
     @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Appointment> appointments = new HashSet<>();
 
+    @OneToOne(mappedBy = "doctor", cascade = CascadeType.ALL)
+    private Office office;
+
     @ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
     @JoinTable(
             name = "patient_doctor",
