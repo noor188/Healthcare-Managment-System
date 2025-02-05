@@ -36,6 +36,8 @@
 │   ├── PatientService.java (already implemented)
 │   ├── DoctorService.java 
 │
+├── exceptions
+|
 └── Main.java (starter code for managing patients)
 ```
 
