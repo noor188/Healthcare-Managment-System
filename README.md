@@ -16,7 +16,9 @@
 5. Ticket 5: Refactor HealthRunner Class to Use Relationship Methods
 
 ------------------------------------------------------------------------
-
+### Exceptions
+1. Input validation
+   
 #### **Project Structure:**
 
 ```
