@@ -6,7 +6,6 @@ import com.healthcaremanagement.repository.DoctorRepositoryImpl;
 import com.healthcaremanagement.repository.OfficeRepositoryImpl;
 import com.healthcaremanagement.service.DoctorService;
 import com.healthcaremanagement.service.OfficeService;
-import com.mysql.cj.protocol.x.Notice;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
