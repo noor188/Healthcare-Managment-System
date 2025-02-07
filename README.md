@@ -33,19 +33,31 @@
 ├── dao/
 │   ├── DatabaseConnection.java (if needed for non-Hibernate setup)
 │   ├── PatientRepositoryImpl.java (starting point for repository)
-│   ├── DoctorRepositoryImpl.java 
+│   ├── DoctorRepositoryImpl.java
+│   ├── AppoinmentRepositoryImpl.java
+│   ├── OfficeRepositoryImpl.java 
 │
 ├── model/
 │   ├── Patient.java (already implemented)
-│   ├── Doctor.java 
+│   ├── Doctor.java
+│   ├── Appoinment.java
+│   ├── Office.java 
 │
 ├── service/
 │   ├── PatientService.java (already implemented)
-│   ├── DoctorService.java 
+│   ├── DoctorService.java
+│   ├── AppoinmentService.java
+│   ├── OfficeService.java 
 │
 ├── exceptions
 |
 └── Main.java (starter code for managing patients)
+
+/src/test/java/org/rma
+├── service/
+│   ├── officeServiceTest.java 
+│   ├── officeServiceTestAll.java
+└── 
 ```
 
 
