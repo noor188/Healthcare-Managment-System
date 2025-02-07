@@ -18,6 +18,8 @@
 ------------------------------------------------------------------------
 
 ### 103: Ticket Breakdown: Healthcare Hibernate JUnit 
+1. Ticket 1: OfficeServiceTest (Isolated Tests Using @BeforeEach)
+2. Ticket 2: OfficeServiceTestAll (Tests That Depend on Each Other Using @BeforeAll and @AfterAll)
 ### Exceptions
 1. Input validation
    
