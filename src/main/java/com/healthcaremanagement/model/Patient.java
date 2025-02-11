@@ -35,7 +35,7 @@ public class Patient {
     @Column(name = "PhoneNumber")
     private String phoneNumber;
 
-    @ManyToMany(mappedBy = "patients", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToMany(mappedBy = "patients", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private Set<Doctor> doctors = new HashSet<>();
 
     @OneToMany(mappedBy = "patient" , cascade = CascadeType.ALL, fetch = FetchType.LAZY)

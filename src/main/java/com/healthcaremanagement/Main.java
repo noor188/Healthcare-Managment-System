@@ -1,8 +1,8 @@
 package com.healthcaremanagement;
 
-import healthcare.model.Patient;
-import healthcare.service.PatientService;
-import healthcare.repository.PatientRepositoryImpl;
+import com.healthcaremanagement.model.Patient;
+import com.healthcaremanagement.service.PatientService;
+import com.healthcaremanagement.repository.PatientRepositoryImpl;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
