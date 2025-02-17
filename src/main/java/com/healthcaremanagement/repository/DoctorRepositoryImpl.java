@@ -1,6 +1,8 @@
 package com.healthcaremanagement.repository;
 
+import com.healthcaremanagement.model.Appointment;
 import com.healthcaremanagement.model.Doctor;
+import com.healthcaremanagement.model.Office;
 import com.healthcaremanagement.model.Patient;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -49,21 +51,37 @@ public class DoctorRepositoryImpl {
         try(Session session = sessionFactory.openSession()) {
             Transaction tx = session.beginTransaction();
             Doctor doctor = session.get(Doctor.class, doctorId);
-            Set<Patient> patients = doctor.getPatients();
+            Set<Patient> patients;
+            Set<Appointment> appointments;
+            Office office;
 
             if (doctor != null)
             {
+                patients = doctor.getPatients();
+                appointments = doctor.getAppointments();
+                office = doctor.getOffice();
+
                 // Many to Many with Patient
                 for (Patient patient : patients) {
                     patient.getDoctors().remove(doctor);
+                    session.update(patient);
                     doctor.getPatients().remove(patient);
+                    session.update(doctor);
                 }
 
                 // One to One with Office
-                if (doctor.getOffice() != null){
-                    doctor.getOffice().setDoctor(null);
-                    session.update(doctor.getOffice());
+                if (office != null){
+                    office.setDoctor(null);
+                    session.update(office);
                     doctor.setOffice(null);
+                    session.update(doctor);
+                }
+
+                // One to Many with appointment
+                for(Appointment appointment: appointments){
+                    appointment.setDoctor(null);
+                    session.update(appointment);
+                    doctor.getAppointments().remove(appointment);
                     session.update(doctor);
                 }
                 session.delete(doctor);
